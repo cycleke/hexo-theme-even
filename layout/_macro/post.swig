@@ -11,8 +11,14 @@
 
       <div class="post-meta">
         <span class="post-time">
-          {{ full_date(post.date, 'YYYY-MM-DD') }}
+          {{ full_date(post.date, config.date_format) }}
         </span>
+        {%if post.updated and post.updated > post.date%}
+          <span class="post-updated">
+              {{ __('posts.updated') }}
+              {{ full_date(post.updated, config.date_format) }}
+          </span>
+        {% endif %}
         {%- if post.categories and post.categories.length -%}
           <span class="post-category">
             {%- for category in post.categories -%}
